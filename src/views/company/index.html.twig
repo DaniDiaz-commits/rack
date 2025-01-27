@@ -1,0 +1,43 @@
+{% extends "layouts/app.html.twig" %}
+
+{% block title %}Listado de empresas{% endblock %}
+
+{% block content %}
+
+
+{% if editCompany is defined %}
+    {% include "company/forms/edit.html.twig" %}
+{% else %}        
+    {% include "company/forms/create.html.twig" %}
+{% endif %}
+
+
+<h2>Listado de empresas</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo de contacto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for company in companies %}
+            <tr>
+                <td>{{ company.getId() }}</td>
+                <td>{{ company.getName() }}</td>
+                <td>{{ company.getContactInfo() }}</td>
+                <td>
+                    <a href="/company/{{ company.getId() }}/edit"><button class="warning"> Editar </button></a>
+                    <form action="/company/{{ company.getId() }}" method="post" class="inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="alert">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

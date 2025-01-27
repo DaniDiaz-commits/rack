@@ -1,0 +1,43 @@
+{% extends "layouts/app.html.twig" %}
+
+{% block title %}Listado de productos{% endblock %}
+
+{% block content %}
+
+{# 
+{% if editProduct is defined %}
+    {% include "company/forms/edit.html.twig" %}
+{% else %}        
+    {% include "company/forms/create.html.twig" %}
+{% endif %} #}
+
+
+<h2>Listado de productos</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.getId() }}</td>
+                <td><a href="/product/company">{{ product.getName() }}</a></td>
+                <td>{{ product.getPrice() }}</td>
+                <td>
+                    {# <a href="/product/{{ product.getId() }}/edit"><button class="warning"> Editar </button></a>
+                    <form action="/product/{{ product.getId() }}" method="post" class="inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="alert">Borrar</button>
+                    </form> #}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
